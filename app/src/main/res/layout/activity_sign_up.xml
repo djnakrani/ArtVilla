@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".login">
+    tools:context=".activity_sign_up">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,14 +31,14 @@
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="150dp"
+                    android:layout_height="100dp"
                     android:layout_marginTop="30dp"
                     android:src="@drawable/logo_big" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="LOGIN"
+                    android:text="SIGN UP"
                     android:fontFamily="sans-serif-light"
                     android:textColor="@color/white"
                     android:textSize="20dp"
@@ -46,13 +46,41 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/email"
+                    android:id="@+id/signupname"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_marginTop="15dp"
                     android:background="@drawable/txt_bg_login"
                     android:drawablePadding="10dp"
-                    android:hint="EMAIL/MOBILE"
+                    android:hint="FULL NAME"
+                    android:textSize="14dp"
+                    android:inputType="textEmailAddress"
+                    android:padding="15dp"
+                    android:textColor="#fff"
+                    android:textColorHint="#AAA4A4" />
+
+                <EditText
+                    android:id="@+id/signupemail"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/txt_bg_login"
+                    android:drawablePadding="10dp"
+                    android:hint="EMAIL"
+                    android:textSize="14dp"
+                    android:inputType="textEmailAddress"
+                    android:padding="15dp"
+                    android:textColor="#fff"
+                    android:textColorHint="#AAA4A4" />
+
+                <EditText
+                    android:id="@+id/signupmono"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/txt_bg_login"
+                    android:drawablePadding="10dp"
+                    android:hint="MOBILE NUMBER"
                     android:textSize="14dp"
                     android:inputType="textEmailAddress"
                     android:padding="15dp"
@@ -73,34 +101,16 @@
                     android:textColor="#fff"
                     android:textColorHint="#B6B0B0" />
 
-                <CheckBox
-                    android:id="@+id/checkbox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="REMEMBER ME"
-                    android:textColor="@android:color/white" />
-
                 <Button
                     android:id="@+id/login"
                     android:layout_width="290dp"
                     android:layout_height="60dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/login_btn"
-                    android:text="LOGIN"
+                    android:text="SIGN UP"
                     android:textAllCaps="false"
                     android:textColor="@android:color/white"
                     android:textSize="17sp" />
-
-                <TextView
-                    android:id="@+id/forgotPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:gravity="center"
-                    android:text="Forgot Password ? "
-                    android:textColor="@android:color/white"
-                    android:textSize="15dp" />
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -111,6 +121,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
                     android:gravity="center">
 
                     <TextView
@@ -118,20 +129,20 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
                         android:fontFamily="sans-serif"
-                        android:text="Don't Have An Account ?"
+                        android:text="Already Have An Account?"
                         android:textAllCaps="true"
                         android:textColor="#fff"
                         android:textSize="14dp"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/linksignup"
+                        android:id="@+id/linklogin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
                         android:fontFamily="sans-serif"
                         android:padding="5dp"
-                        android:text="SIGN UP"
+                        android:text="LOGIN"
                         android:textAllCaps="true"
                         android:textColor="#fd4350"
                         android:textSize="16dp"
