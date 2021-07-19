@@ -1,13 +1,14 @@
 {
   "project_info": {
     "project_number": "262149591182",
+    "firebase_url": "https://artvilla-e0212-default-rtdb.firebaseio.com",
     "project_id": "artvilla-e0212",
     "storage_bucket": "artvilla-e0212.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:262149591182:android:aaa3b26fc4bc1e163779df",
+        "mobilesdk_app_id": "1:262149591182:android:dbe69e7a492632333779df",
         "android_client_info": {
           "package_name": "com.example.artvilla"
         }

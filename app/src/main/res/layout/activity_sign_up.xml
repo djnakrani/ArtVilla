@@ -88,7 +88,7 @@
                     android:textColorHint="#AAA4A4" />
 
                 <EditText
-                    android:id="@+id/password"
+                    android:id="@+id/signuppwd"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_marginTop="10dp"
@@ -102,7 +102,7 @@
                     android:textColorHint="#B6B0B0" />
 
                 <Button
-                    android:id="@+id/login"
+                    android:id="@+id/signupbtn"
                     android:layout_width="290dp"
                     android:layout_height="60dp"
                     android:layout_marginTop="10dp"
@@ -148,6 +148,13 @@
                         android:textSize="16dp"
                         android:textStyle="bold" />
                 </LinearLayout>
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:visibility="invisible"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
