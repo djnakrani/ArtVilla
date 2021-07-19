@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "262149591182",
+    "project_id": "artvilla-e0212",
+    "storage_bucket": "artvilla-e0212.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:262149591182:android:aaa3b26fc4bc1e163779df",
+        "android_client_info": {
+          "package_name": "com.example.artvilla"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "262149591182-vcadl57t0nof0r45ntmiifabqjjvpqmb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-FEW1_we7YnLsbaxY_fFcGy0t4nDA1s4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "262149591182-vcadl57t0nof0r45ntmiifabqjjvpqmb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
