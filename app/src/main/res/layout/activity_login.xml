@@ -46,13 +46,13 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/email"
+                    android:id="@+id/signinemail"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_marginTop="15dp"
                     android:background="@drawable/txt_bg_login"
                     android:drawablePadding="10dp"
-                    android:hint="EMAIL/MOBILE"
+                    android:hint="EMAIL"
                     android:textSize="14dp"
                     android:inputType="textEmailAddress"
                     android:padding="15dp"
@@ -60,7 +60,7 @@
                     android:textColorHint="#AAA4A4" />
 
                 <EditText
-                    android:id="@+id/password"
+                    android:id="@+id/signinpassword"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_marginTop="10dp"
@@ -73,16 +73,16 @@
                     android:textColor="#fff"
                     android:textColorHint="#B6B0B0" />
 
-                <CheckBox
-                    android:id="@+id/checkbox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="REMEMBER ME"
-                    android:textColor="@android:color/white" />
+<!--                <CheckBox-->
+<!--                    android:id="@+id/checkbox"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="15dp"-->
+<!--                    android:text="REMEMBER ME"-->
+<!--                    android:textColor="@android:color/white" />-->
 
                 <Button
-                    android:id="@+id/login"
+                    android:id="@+id/loginbtn"
                     android:layout_width="290dp"
                     android:layout_height="60dp"
                     android:layout_marginTop="10dp"
@@ -137,6 +137,13 @@
                         android:textSize="16dp"
                         android:textStyle="bold" />
                 </LinearLayout>
+
+                <ProgressBar
+                    android:id="@+id/loginprogress"
+                    style="?android:attr/progressBarStyle"
+                    android:visibility="invisible"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
