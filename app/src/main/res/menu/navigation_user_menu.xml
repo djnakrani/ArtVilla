@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/uProfile"
+        android:title="Profile"
+        />
+
+    <item
+        android:id="@+id/uCpassword"
+        android:title="Change Password"
+        />
+
+    <item
+        android:id="@+id/uOrder"
+        android:title="My Orders"
+        />
+
+    <item
+        android:id="@+id/uLogout"
+        android:title="Logout"
+        />
+</menu>

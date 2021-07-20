@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.artvilla">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_logo_foreground"
         android:supportsRtl="true"
         android:theme="@style/theme.notitlebar">
-        <activity android:name=".activity_sign_up"></activity>
+        <activity android:name=".User_Activity" />
+        <activity android:name=".Admin_Panel" />
+        <activity android:name=".activity_sign_up" />
         <activity android:name=".splash_activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

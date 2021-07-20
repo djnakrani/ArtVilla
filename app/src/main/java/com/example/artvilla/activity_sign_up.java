@@ -80,7 +80,7 @@ public class activity_sign_up extends AppCompatActivity {
                                 data.put("Mail",uMail);
                                 data.put("Mobile",uMono);
                                 data.put("ImageURL","Default");
-                                data.put("UserType","Admin");
+                                data.put("UserType","1");
                                 uData.setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                                     @Override
