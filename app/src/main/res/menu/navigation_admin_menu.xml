@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/aHome"
+        android:title="Home"
+        />
+
+    <item
+        android:id="@+id/aCpassword"
+        android:title="Change Password"
+        />
+
+    <item
+        android:id="@+id/aItem"
+        android:title="Add item"
+        />
+
+    <item
+        android:id="@+id/aManage"
+        android:title="Manage All Item"
+        />
+
+    <item
+        android:id="@+id/aLogout"
+        android:title="Logout"
+        />
+</menu>

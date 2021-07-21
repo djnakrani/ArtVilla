@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="20dp"
+        android:background="@drawable/login_bg">
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="UserName"
+        android:textColor="@color/white"
+        android:textSize="30dp"/>
+
+    <TextView
+        android:id="@+id/user_mono"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mobile No"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:layout_below="@+id/user_name"
+        tools:layout_editor_absoluteY="36dp" />
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

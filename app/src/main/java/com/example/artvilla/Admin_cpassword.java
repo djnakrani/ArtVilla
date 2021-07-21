@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import org.jetbrains.annotations.NotNull;
 
-public class Admin_Panel extends AppCompatActivity {
+public class Admin_cpassword extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
     NavigationView nav_user;
@@ -26,7 +26,8 @@ public class Admin_Panel extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_panel);
+        setContentView(R.layout.activity_admin_cpassword);
+
         fAuth = FirebaseAuth.getInstance();
         drawerLayout = findViewById(R.id.drawer_user);
         nav_user = findViewById(R.id.user_nav);
@@ -41,42 +42,38 @@ public class Admin_Panel extends AppCompatActivity {
         nav_user.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
-                Toast.makeText(Admin_Panel.this, "You Are Already In Home Page...",Toast.LENGTH_SHORT).show();
                 int id = item.getItemId();
                 switch(id)
                 {
                     case R.id.aHome:
-                        Toast.makeText(Admin_Panel.this, "You Are Already In Home Page...",Toast.LENGTH_SHORT).show();
-//                        startActivity(new Intent(Admin_Panel.this, MainActivity.class));
-//                        finish();
+//                        Toast.makeText(Admin_cpassword.this, "You Are Already In Home Page...",Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(Admin_cpassword.this, Admin_Panel.class));
+                        finish();
                         break;
                     case R.id.aCpassword:
-//                        Toast.makeText(Admin_Panel.this, "Change password",Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(Admin_Panel.this, Admin_cpassword.class));
-                        finish();
+                        Toast.makeText(Admin_cpassword.this, "You Are Already In Home Page...",Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.aItem:
-//                        Toast.makeText(Admin_Panel.this, "My Order",Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(Admin_Panel.this, Admin_additem.class));
-                        finish();
+                        Toast.makeText(Admin_cpassword.this, "My Order",Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.aLogout:
-                        Toast.makeText(Admin_Panel.this, "Logout",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Admin_cpassword.this, "Logout",Toast.LENGTH_SHORT).show();
                         logOut();
                         break;
                     default:
                         return true;
                 }
+
                 return true;
 
             }
         });
 
     }
-
     private void logOut() {
         fAuth.signOut();
-        startActivity(new Intent(Admin_Panel.this,MainActivity.class));
+        startActivity(new Intent(Admin_cpassword.this,MainActivity.class));
         finish();
     }
+
 }

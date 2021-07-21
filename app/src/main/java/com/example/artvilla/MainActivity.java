@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
         if(fAuth.getUid() != null){
             Toast.makeText(MainActivity.this,fAuth.getUid(),Toast.LENGTH_LONG).show();
             loginbtn.setBackgroundResource(R.drawable.ic_baseline_person_24);
-            loginbtn.setWidth(40);
-            loginbtn.setHeight(40);
+            loginbtn.setWidth(10);
+            loginbtn.setHeight(30);
             loginbtn.setText(" ");
         }
         else {
@@ -45,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(fAuth.getUid() != null){
-                    startActivity(new Intent(MainActivity.this, User_Activity.class));
+//                    startActivity(new Intent(MainActivity.this, User_Activity.class));
+                    startActivity(new Intent(MainActivity.this,Admin_Panel.class));
                     finish();
                 }
                 else {

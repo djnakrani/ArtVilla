@@ -1,6 +1,7 @@
 package com.example.artvilla;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -12,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
@@ -22,9 +24,8 @@ import org.jetbrains.annotations.NotNull;
 public class User_Activity extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
-    Button navbarbtn,home;
-    boolean draweropen = true;
-    NavigationView nv;
+    NavigationView nav_user;
+    ActionBarDrawerToggle toggle;
     FirebaseAuth fAuth;
 
     @Override
@@ -32,40 +33,25 @@ public class User_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
         fAuth = FirebaseAuth.getInstance();
-        drawerLayout = findViewById(R.id.drawerlayout);
-        navbarbtn = findViewById(R.id.navbar_menu);
-        home =findViewById(R.id.home);
-        nv = findViewById(R.id.nv);
+        drawerLayout = findViewById(R.id.drawer_user);
+        nav_user = findViewById(R.id.user_nav);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(User_Activity.this, MainActivity.class));
-                finish();
-            }
-        });
+        toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.Open,R.string.Close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.setDrawerIndicatorEnabled(true);
+        toggle.syncState();
 
-        navbarbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(draweropen){
-                    drawerLayout.openDrawer(GravityCompat.END);
-                    draweropen=false;
-                }else {
-                    drawerLayout.closeDrawer(GravityCompat.END);
-                    draweropen=true;
-                }
-            }
-        });
-
-        nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        nav_user.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
                 int id = item.getItemId();
                 switch(id)
                 {
                     case R.id.uProfile:
-                        Toast.makeText(User_Activity.this, "Profile",Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(User_Activity.this, MainActivity.class));
+                        finish();
                         break;
                     case R.id.uCpassword:
                         Toast.makeText(User_Activity.this, "Change password",Toast.LENGTH_SHORT).show();
