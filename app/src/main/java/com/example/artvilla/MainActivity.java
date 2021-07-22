@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                     uData.child("User").child(fAuth.getUid()).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                            System.out.println(snapshot.child("userType"));
+//                            System.out.println(snapshot.child("userType"));
                             if (snapshot.child("userType").exists()) {
                                 if(snapshot.child("userType").getValue().equals("Admin")){
                                     startActivity(new Intent(MainActivity.this,Admin_Panel.class));

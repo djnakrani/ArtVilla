@@ -15,16 +15,17 @@
         layout="@layout/main_content"
         />
 
-    <!--    <ScrollView-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="10dp"-->
-    <!--        ">-->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:background="@drawable/white_bg"
+            >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:background="@drawable/white_bg">
+        >
 
 
         <EditText
@@ -59,12 +60,12 @@
             android:hint="Price"
             android:layout_below="@+id/editAname"/>
 
-        <EditText
+        <ImageView
             android:id="@+id/editFileName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
+            android:padding="10dp"
+            android:src="@drawable/ic_baseline_image_100"
             android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true"
             android:hint="File"
@@ -84,7 +85,7 @@
 
 
     </RelativeLayout>
-    <!--    </ScrollView>-->
+        </ScrollView>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/user_nav"
         android:layout_marginTop="?attr/actionBarSize"
