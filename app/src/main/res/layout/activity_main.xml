@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
-            android:text="Art Villa "
+            android:text="ArtVilla "
             android:textColor="#FFF"
             android:textSize="20dp"
             android:textStyle="bold" />
@@ -29,7 +29,7 @@
             <Button
                 android:id="@+id/gotologin"
                 android:layout_width="70dp"
-                android:layout_height="35dp"
+                android:layout_height="50dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"

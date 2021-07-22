@@ -42,29 +42,37 @@ public class Admin_additem extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
                 int id = item.getItemId();
-                switch(id)
-                {
+                switch (id) {
                     case R.id.aHome:
+//                        Toast.makeText(Admin_cpassword.this, "You Are Already In Home Page...", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(Admin_additem.this, Admin_Panel.class));
                         finish();
                         break;
                     case R.id.aCpassword:
+//                        Toast.makeText(Admin_additem.this, "You Are Already In Home Page...",Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(Admin_additem.this, Admin_cpassword.class));
                         finish();
                         break;
                     case R.id.aItem:
-                        Toast.makeText(Admin_additem.this, "You Are Already In Home Page...",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Admin_additem.this, "You Are Already In Home Page...", Toast.LENGTH_SHORT).show();
+//                        startActivity(new Intent(Admin_additem.this, Admin_additem.class));
+//                        finish();
+                        break;
+
+                    case R.id.aManage:
+//                        Toast.makeText(Admin_Panel.this, "You Are Already In Home Page...",Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(Admin_additem.this, Admin_manageActivty.class));
+                        finish();
                         break;
                     case R.id.aLogout:
-                        Toast.makeText(Admin_additem.this, "Logout",Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(Admin_Panel.this, "You Are Already In Home Page...",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Admin_additem.this, "Logout", Toast.LENGTH_SHORT).show();
                         logOut();
                         break;
                     default:
                         return true;
                 }
-
                 return true;
-
             }
         });
 

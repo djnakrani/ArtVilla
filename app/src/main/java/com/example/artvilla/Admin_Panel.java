@@ -41,7 +41,6 @@ public class Admin_Panel extends AppCompatActivity {
         nav_user.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
-                Toast.makeText(Admin_Panel.this, "You Are Already In Home Page...",Toast.LENGTH_SHORT).show();
                 int id = item.getItemId();
                 switch(id)
                 {
@@ -51,16 +50,23 @@ public class Admin_Panel extends AppCompatActivity {
 //                        finish();
                         break;
                     case R.id.aCpassword:
-//                        Toast.makeText(Admin_Panel.this, "Change password",Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(Admin_Panel.this, "You Are Already In Home Page...",Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(Admin_Panel.this, Admin_cpassword.class));
                         finish();
                         break;
                     case R.id.aItem:
-//                        Toast.makeText(Admin_Panel.this, "My Order",Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(Admin_Panel.this, "You Are Already In Home Page...",Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(Admin_Panel.this, Admin_additem.class));
                         finish();
                         break;
+
+                    case R.id.aManage:
+//                        Toast.makeText(Admin_Panel.this, "You Are Already In Home Page...",Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(Admin_Panel.this, Admin_manageActivty.class));
+                        finish();
+                        break;
                     case R.id.aLogout:
+//                        Toast.makeText(Admin_Panel.this, "You Are Already In Home Page...",Toast.LENGTH_SHORT).show();
                         Toast.makeText(Admin_Panel.this, "Logout",Toast.LENGTH_SHORT).show();
                         logOut();
                         break;

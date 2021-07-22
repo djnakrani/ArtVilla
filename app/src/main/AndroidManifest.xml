@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_logo_foreground"
         android:supportsRtl="true"
         android:theme="@style/theme.notitlebar">
-        <activity android:name=".Admin_additem"></activity>
+        <activity android:name=".Admin_manageActivty"></activity>
+        <activity android:name=".Admin_additem" />
         <activity android:name=".Admin_cpassword" />
         <activity android:name=".User_Activity" />
         <activity android:name=".Admin_Panel" />

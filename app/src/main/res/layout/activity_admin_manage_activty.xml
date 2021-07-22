@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/drawer_user"
+    tools:context=".Admin_manageActivty">
+
+    <include
+        android:id="@+id/User_main_layout"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        layout="@layout/main_content"
+        />
+
+    <!--    <ScrollView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="10dp"-->
+    <!--        ">-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        >
+
+
+    </androidx.recyclerview.widget.RecyclerView>
+    <!--    </ScrollView>-->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/user_nav"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:menu="@menu/navigation_admin_menu"
+        app:headerLayout="@layout/nav_bar"
+        android:fitsSystemWindows="true"
+        android:layout_gravity="left"/>
+
+</androidx.drawerlayout.widget.DrawerLayout>

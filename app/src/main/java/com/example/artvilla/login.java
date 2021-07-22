@@ -61,25 +61,24 @@ public class login extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<DataSnapshot> task) {
                                     if(task.isSuccessful()){
-                                        String type = task.getResult().child("UserType").getValue().toString();
-                                        if(type.equalsIgnoreCase("0")){
-//                                            Log.i("Type",type);
-//                                            Toast.makeText(login.this,type,Toast.LENGTH_LONG).show();
-                                            startActivity(new Intent(login.this, Admin_Panel.class));
-                                            finish();
-                                        }
-                                        else {
-//                                            Toast.makeText(login.this,type,Toast.LENGTH_LONG).show();
-                                            startActivity(new Intent(login.this, MainActivity.class));
-                                            finish();
+                                        if(task.getResult().child("userType").exists())
+                                        {
+                                            User obj = task.getResult().getValue(User.class);
+                                            if((obj.getUserType()).equals("Admin")){
+                                                startActivity(new Intent(login.this, Admin_Panel.class));
+                                                finish();
+                                            }
+                                            else {
+                                                startActivity(new Intent(login.this, MainActivity.class));
+                                                finish();
+                                            }
+
                                         }
                                     }else {
                                         Toast.makeText(login.this,task.getException().getMessage(),Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });
-//                            Toast.makeText(login.this,uId,Toast.LENGTH_LONG).show();
-
                         }else {
                             Toast.makeText(login.this,task.getException().getMessage(),Toast.LENGTH_LONG).show();
                         }
@@ -95,6 +94,5 @@ public class login extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 }

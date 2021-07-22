@@ -39,6 +39,7 @@ public class activity_sign_up extends AppCompatActivity {
     boolean isVaild=false;
     DatabaseReference uData;
     FirebaseAuth fAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,14 +75,14 @@ public class activity_sign_up extends AppCompatActivity {
                                 FirebaseUser user = fAuth.getCurrentUser();
                                 String uId = user.getUid();
                                 uData =FirebaseDatabase.getInstance().getReference("User").child(uId);
-                                HashMap<String,String> data=new HashMap<>();
-                                data.put("U_Id",uId);
-                                data.put("Name",uName);
-                                data.put("Mail",uMail);
-                                data.put("Mobile",uMono);
-                                data.put("ImageURL","Default");
-                                data.put("UserType","1");
-                                uData.setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                HashMap<String,String> data=new HashMap<>();
+                                User u1 = new User();
+                                u1.setName(uName);
+                                u1.setMail(uMail);
+                                u1.setMobile(uMono);
+                                u1.setUserType("User");
+                                u1.setImageURL("Default");
+                                uData.setValue(u1).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
