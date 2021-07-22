@@ -15,6 +15,68 @@
         layout="@layout/main_content"
         />
 
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="?attr/actionBarSize"
+    android:background="@drawable/white_bg">
+        
+    <ImageView
+        android:id="@+id/ProfilePhoto"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_baseline_person_24"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"/>
+
+    <EditText
+        android:id="@+id/edituName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:hint="Full Name"
+        android:layout_below="@+id/ProfilePhoto"/>
+
+    <EditText
+        android:id="@+id/edituMono"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:hint="Mobile Number"
+        android:layout_below="@+id/edituName"/>
+
+    <EditText
+        android:id="@+id/edituEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:hint="Email Id"
+        android:layout_below="@+id/edituMono"/>
+
+    <Button
+        android:id="@+id/btnChangeDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change Profile"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:padding="10dp"
+        android:layout_below="@id/edituEmail"
+        android:textColor="@color/white"
+        android:background="@drawable/btn_bg"/>
+
+
+</RelativeLayout>
+    <!--    </ScrollView>-->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/user_nav"
         android:layout_marginTop="?attr/actionBarSize"

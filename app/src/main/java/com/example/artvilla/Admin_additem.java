@@ -9,10 +9,17 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -22,12 +29,21 @@ public class Admin_additem extends AppCompatActivity {
     NavigationView nav_user;
     ActionBarDrawerToggle toggle;
     FirebaseAuth fAuth;
+    EditText itemname,artistname,price,file;
+    Button btnAdd;
+    DatabaseReference iData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_additem);
         fAuth = FirebaseAuth.getInstance();
+        itemname = findViewById(R.id.editIname);
+        artistname = findViewById(R.id.editAname);
+        price = findViewById(R.id.editPrice);
+        file = findViewById(R.id.editFileName);
+        btnAdd = findViewById(R.id.btnAddItem);
+
         drawerLayout = findViewById(R.id.drawer_user);
         nav_user = findViewById(R.id.user_nav);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -76,6 +92,35 @@ public class Admin_additem extends AppCompatActivity {
             }
         });
 
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                items i1=new items();
+                i1.setItem_name(itemname.getText().toString());
+                i1.setArtist_name(artistname.getText().toString());
+                i1.setPrice(price.getText().toString());
+                i1.setPhotoPath("default");
+                iData = FirebaseDatabase.getInstance().getReference("Items").child(i1.getItem_name());
+                iData.setValue(i1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+                        if(task.isSuccessful())
+                        {
+                            Toast.makeText(Admin_additem.this,"Item Added Successfully...",Toast.LENGTH_SHORT).show();
+                            itemname.setText(" ");
+                            artistname.setText(" ");
+                            price.setText(" ");
+                            file.setText(" ");
+                        }
+                        else {
+                            Toast.makeText(Admin_additem.this,"Something Went Wrong,Please Try After Sometime",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+
+            }
+        });
     }
     private void logOut() {
         fAuth.signOut();
