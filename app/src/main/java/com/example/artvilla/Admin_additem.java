@@ -37,6 +37,8 @@ import com.google.firebase.storage.UploadTask;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Admin_additem extends AppCompatActivity {
 
@@ -130,14 +132,13 @@ public class Admin_additem extends AppCompatActivity {
                                     i1.setItem_name(itemname.getText().toString());
                                     i1.setArtist_name(artistname.getText().toString());
                                     i1.setartist_mono(AMono.getText().toString());
-                                    String path = UploadImage().toString();
-                                    System.out.println(path);
-                                    i1.setPhotoPath(path);
+                                    i1.setPhotoPath("default");
                                     DatabaseReference iDataChild = FirebaseDatabase.getInstance().getReference("Items").child(i1.getItem_name());
                                     iDataChild.setValue(i1).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NotNull Task<Void> task) {
                                             if (task.isSuccessful()) {
+                                                UploadImage();
                                                 Toast.makeText(Admin_additem.this, "Item Added Successfully...", Toast.LENGTH_SHORT).show();
                                                 itemname.setText("");
                                                 artistname.setText("");
@@ -166,7 +167,7 @@ public class Admin_additem extends AppCompatActivity {
     }
 
     private Uri UploadImage() {
-        final String[] filepath = {new String()};
+        final String[] filepath = new String[1];
         ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Data Stored...");
         progressDialog.show();
@@ -179,8 +180,26 @@ public class Admin_additem extends AppCompatActivity {
                 fileUpload.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        filepath[0] = uri.toString();
-                        System.out.println(filepath[0]);
+                        filepath[0] = String.valueOf(uri);
+                        DatabaseReference change = iData.child("Items").child(path);
+//                        System.out.println(change);
+                        Map<String, Object> hopperUpdates = new HashMap<>();
+                        hopperUpdates.put("photoPath",filepath[0]);
+
+                        change.updateChildren(hopperUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                if(task.isSuccessful())
+                                {
+                                    Toast.makeText(Admin_additem.this,"Updated..",Toast.LENGTH_LONG).show();
+                                }
+                                else {
+                                    Toast.makeText(Admin_additem.this,task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                                }
+
+                            }
+                        });
+//                        System.out.println(hopperUpdates);
                     }
                 });
 

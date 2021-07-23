@@ -12,6 +12,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import androidx.appcompat.widget.SearchView;
+
+import android.view.MotionEvent;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -36,7 +38,7 @@ public class Admin_manageActivty extends AppCompatActivity {
     SearchView searchView;
     DatabaseReference iData;
     ArrayList<items> list;
-
+    ItemAdapter itemAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +58,7 @@ public class Admin_manageActivty extends AppCompatActivity {
         toggle.syncState();
         listitems.setLayoutManager(new LinearLayoutManager(getBaseContext(),LinearLayoutManager.VERTICAL,false));
         listitems.setHasFixedSize(true);
-
+        onStart();
         nav_user.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
@@ -89,11 +91,11 @@ public class Admin_manageActivty extends AppCompatActivity {
             }
         });
     }
-        private void logOut() {
-            fAuth.signOut();
-            startActivity(new Intent(Admin_manageActivty.this,MainActivity.class));
-            finish();
-        }
+    private void logOut() {
+        fAuth.signOut();
+        startActivity(new Intent(Admin_manageActivty.this,MainActivity.class));
+        finish();
+    }
 
     @Override
     protected void onStart() {
@@ -110,8 +112,9 @@ public class Admin_manageActivty extends AppCompatActivity {
                         {
                             list.add(sp.getValue(items.class));
                         }
-                        ItemAdapter itemAdapter = new ItemAdapter(list);
+                        itemAdapter = new ItemAdapter(list);
                         listitems.setAdapter(itemAdapter);
+
                     }
                 }
 
