@@ -45,7 +45,7 @@ public class Admin_additem extends AppCompatActivity {
     NavigationView nav_user;
     ActionBarDrawerToggle toggle;
     FirebaseAuth fAuth;
-    EditText itemname,artistname,price;
+    EditText itemname,artistname,AMono;
     Button btnAdd;
     DatabaseReference iData;
     ImageView itemImage;
@@ -60,7 +60,7 @@ public class Admin_additem extends AppCompatActivity {
         sR = FirebaseStorage.getInstance().getReference();
         itemname = findViewById(R.id.editIname);
         artistname = findViewById(R.id.editAname);
-        price = findViewById(R.id.editPrice);
+        AMono = findViewById(R.id.editAMono);
         btnAdd = findViewById(R.id.btnAddItem);
         itemImage = findViewById(R.id.editFileName);
         drawerLayout = findViewById(R.id.drawer_user);
@@ -114,44 +114,47 @@ public class Admin_additem extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkValidation(itemname,artistname,price,itemImage)){
-
-                    iData.child("Items").addValueEventListener(new ValueEventListener() {
+                if(checkValidation(itemname,artistname,AMono,itemImage)){
+                    iData.child("Items").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
-                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        public void onDataChange(@NotNull DataSnapshot snapshot) {
                             String id = itemname.getText().toString();
-                            System.out.println(snapshot.child(id));
-                            if(snapshot.child(id).exists())
+//                            System.out.println(snapshot.child(id));
+                            if((!snapshot.child(id).exists()) & (id != ""))
                             {
-                                Toast.makeText(Admin_additem.this,"Item Already Exist...",Toast.LENGTH_SHORT).show();
-                            }
-                            else {
-                                    items i1=new items();
+//                                System.out.println(iData);
+//                                System.out.println(snapshot.child(id).getValue());
+                                if(snapshot.child(id).getValue() == null)
+                                {
+                                    items i1 = new items();
                                     i1.setItem_name(itemname.getText().toString());
                                     i1.setArtist_name(artistname.getText().toString());
-                                    i1.setPrice(price.getText().toString());
-                                    i1.setPhotoPath("default");
-                                    iData = FirebaseDatabase.getInstance().getReference("Items").child(i1.getItem_name());
-                                    iData.setValue(i1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    i1.setartist_mono(AMono.getText().toString());
+                                    String path = UploadImage().toString();
+                                    System.out.println(path);
+                                    i1.setPhotoPath(path);
+                                    DatabaseReference iDataChild = FirebaseDatabase.getInstance().getReference("Items").child(i1.getItem_name());
+                                    iDataChild.setValue(i1).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
-                                        public void onComplete(@NonNull @NotNull Task<Void> task) {
-                                            if(task.isSuccessful())
-                                            {
-                                                Upload();
-                                                Toast.makeText(Admin_additem.this,"Item Added Successfully...",Toast.LENGTH_SHORT).show();
-                                                itemname.setText(" ");
-                                                artistname.setText(" ");
-                                                price.setText(" ");
-                                            }
-                                            else {
-                                                Toast.makeText(Admin_additem.this,"Something Went Wrong,Please Try After Sometime",Toast.LENGTH_SHORT).show();
+                                        public void onComplete(@NotNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(Admin_additem.this, "Item Added Successfully...", Toast.LENGTH_SHORT).show();
+                                                itemname.setText("");
+                                                artistname.setText("");
+                                                AMono.setText("");
+                                                filePath = null;
+                                            } else {
+                                                Toast.makeText(Admin_additem.this, "Something Went Wrong,Please Try After Sometime", Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     });
+                                }
                             }
-
+                            else
+                            {
+                                Toast.makeText(Admin_additem.this,"Item Already Exist...",Toast.LENGTH_SHORT).show();
+                            }
                         }
-
                         @Override
                         public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
@@ -162,7 +165,8 @@ public class Admin_additem extends AppCompatActivity {
         });
     }
 
-    private void Upload() {
+    private Uri UploadImage() {
+        final String[] filepath = {new String()};
         ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Data Stored...");
         progressDialog.show();
@@ -172,18 +176,27 @@ public class Admin_additem extends AppCompatActivity {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 progressDialog.dismiss();
+                fileUpload.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        filepath[0] = uri.toString();
+                        System.out.println(filepath[0]);
+                    }
+                });
+
                 itemImage.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_image_100));
             }
         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onProgress(@NonNull @NotNull UploadTask.TaskSnapshot snapshot) {
-                Double progess= (100.0 * snapshot.getBytesTransferred())/snapshot.getTotalByteCount();
+                double progess= ((100.0 * snapshot.getBytesTransferred())/snapshot.getTotalByteCount());
                 progressDialog.setTitle((progess) + "% Uploaded..");
             }
         });
+        return filePath;
     }
 
-    private boolean checkValidation(EditText itemname, EditText artistname, EditText price, ImageView itemImage) {
+    private boolean checkValidation(EditText itemname, EditText artistname, EditText AMono, ImageView itemImage) {
         boolean isIname,isAname,isPrice,isFilepath;
         if(itemname.getText().toString().isEmpty()){
             itemname.setError("Item Name Is Required..");
@@ -199,8 +212,8 @@ public class Admin_additem extends AppCompatActivity {
         else {
             isAname=true;
         }
-        if(price.getText().toString().isEmpty()){
-            price.setError("Price Is Required..");
+        if(AMono.getText().toString().isEmpty()){
+            AMono.setError("Price Is Required..");
             isPrice=false;
         }
         else {

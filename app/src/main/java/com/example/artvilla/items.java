@@ -1,19 +1,19 @@
 package com.example.artvilla;
 
 public class items {
-    String item_name;
-    String artist_name;
-    String price;
-    String PhotoPath;
+    private String item_name;
+    private String artist_name;
+    private String artist_mono;
+    private String PhotoPath;
 
     public items()
     {
     }
 
-    public items(String item_name, String artist_name, String price, String photoPath) {
+    public items(String item_name, String artist_name, String artist_mono, String photoPath) {
         this.item_name = item_name;
         this.artist_name = artist_name;
-        this.price = price;
+        this.artist_mono = artist_mono;
         PhotoPath = photoPath;
     }
 
@@ -33,12 +33,12 @@ public class items {
         this.artist_name = artist_name;
     }
 
-    public String getPrice() {
-        return price;
+    public String getartist_mono() {
+        return artist_mono;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setartist_mono(String artist_mono) {
+        this.artist_mono = artist_mono;
     }
 
     public String getPhotoPath() {

@@ -25,6 +25,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
         >
 
 
@@ -50,14 +51,14 @@
             android:layout_below="@+id/editIname"/>
 
         <EditText
-            android:id="@+id/editPrice"
+            android:id="@+id/editAMono"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
             android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true"
-            android:hint="Price"
+            android:hint="Mobile Number"
             android:layout_below="@+id/editAname"/>
 
         <ImageView
@@ -69,7 +70,7 @@
             android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true"
             android:hint="File"
-            android:layout_below="@+id/editPrice"/>
+            android:layout_below="@+id/editAMono"/>
 
         <Button
             android:id="@+id/btnAddItem"

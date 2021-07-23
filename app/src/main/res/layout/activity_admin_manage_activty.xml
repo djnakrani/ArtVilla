@@ -20,16 +20,28 @@
     <!--        android:layout_height="10dp"-->
     <!--        ">-->
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycle1"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
-        android:background="@drawable/white_bg"
         >
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/Aitem_lists"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/searchView"
+            android:background="@drawable/white_bg"
+            >
 
-    </androidx.recyclerview.widget.RecyclerView>
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </RelativeLayout>
     <!--    </ScrollView>-->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/user_nav"
