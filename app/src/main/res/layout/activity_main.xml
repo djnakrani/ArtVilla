@@ -30,58 +30,37 @@
                 android:id="@+id/gotologin"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
-                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
                 android:text="LOGIN"
                 android:textColor="@color/white"
                 android:background="@drawable/btn_bg"
-                android:gravity="center" />
-
-
-        </RelativeLayout>
-
-    </LinearLayout>
-    <LinearLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="#283593">
-
-        <EditText
-        android:id="@+id/editSearch"
-        android:layout_width="300dp"
-        android:layout_height="match_parent"
-        android:ems="10"
-        android:layout_margin="5dp"
-        android:inputType="textPersonName"
-        android:text=""
-        android:hint="Search Item"
-        android:background="@color/white" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/searchbtn"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginEnd="16dp"
-                android:layout_margin="5dp"
-                android:layout_marginRight="16dp"
                 android:gravity="center"
-                android:background="#2196F3"
-                android:text="Search" />
+                android:layout_alignParentRight="true" />
+
 
         </RelativeLayout>
 
     </LinearLayout>
-
-    <ListView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/all_view_product"/>
+        >
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/usearchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/User_items"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/usearchView"
+            android:background="@drawable/white_bg"
+            >
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </RelativeLayout>
 </LinearLayout>
