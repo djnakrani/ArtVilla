@@ -1,7 +1,5 @@
 package com.example.artvilla;
 
-import java.util.PrimitiveIterator;
-
 public class User {
 
     private String U_id;
@@ -14,7 +12,7 @@ public class User {
     {
     }
 
-    public User(String u_id, String name, String mobile, String mail, String imageURL, String userType) {
+    public User(String u_id, String name, String mobile, String mail, String userType) {
         U_id = u_id;
         Name = name;
         Mobile = mobile;

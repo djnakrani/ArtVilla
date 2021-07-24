@@ -12,8 +12,8 @@
         />
 
     <item
-        android:id="@+id/uOrder"
-        android:title="My Orders"
+        android:id="@+id/uFav"
+        android:title="Favorite"
         />
 
     <item

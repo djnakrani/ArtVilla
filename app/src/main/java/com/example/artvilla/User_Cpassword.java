@@ -27,9 +27,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.net.Authenticator;
-
-public class Admin_cpassword extends AppCompatActivity {
+public class User_Cpassword extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
     NavigationView nav_user;
@@ -38,10 +36,11 @@ public class Admin_cpassword extends AppCompatActivity {
     FirebaseUser user;
     Button cpassword;
     EditText old,newp,cnew;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_cpassword);
+        setContentView(R.layout.activity_user_cpassword);
 
         initilization();
 
@@ -49,33 +48,31 @@ public class Admin_cpassword extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
                 int id = item.getItemId();
-                switch (id) {
-                    case R.id.aHome:
-                        startActivity(new Intent(Admin_cpassword.this, Admin_Panel.class));
+                switch(id)
+                {
+                    case R.id.uProfile:
+                        startActivity(new Intent(User_Cpassword.this, User_Activity.class));
                         finish();
                         break;
-                    case R.id.aCpassword:
-                        Toast.makeText(Admin_cpassword.this, "You Are Already In Home Page...",Toast.LENGTH_SHORT).show();
+                    case R.id.uCpassword:
+                        Toast.makeText(User_Cpassword.this, "You Are Already in This Page...",Toast.LENGTH_SHORT).show();
                         break;
-                    case R.id.aItem:
-                        startActivity(new Intent(Admin_cpassword.this, Admin_additem.class));
+                    case R.id.uFav:
+                        startActivity(new Intent(User_Cpassword.this, User_Activity.class));
                         finish();
                         break;
-
-                    case R.id.aManage:
-                        startActivity(new Intent(Admin_cpassword.this, Admin_manageActivty.class));
-                        finish();
-                        break;
-                    case R.id.aLogout:
-                        Toast.makeText(Admin_cpassword.this, "Logout", Toast.LENGTH_SHORT).show();
+                    case R.id.uLogout:
+                        Toast.makeText(User_Cpassword.this, "Logout",Toast.LENGTH_SHORT).show();
                         logOut();
                         break;
                     default:
                         return true;
                 }
+
                 return true;
+
             }
-            });
+        });
 
         cpassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +83,6 @@ public class Admin_cpassword extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     private void initilization() {
@@ -96,18 +92,25 @@ public class Admin_cpassword extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         String curr_usermail = fAuth.getCurrentUser().getEmail();
-        System.out.println(curr_usermail);
         View nav = nav_user.getHeaderView(0);
         TextView useremail = nav.findViewById(R.id.user_email);
+        TextView username = nav.findViewById(R.id.user_name);
         useremail.setText(curr_usermail);
-        cpassword = findViewById(R.id.btnCapassword);
-        old = findViewById(R.id.editOldpwd);
-        newp = findViewById(R.id.editNewpwd);
-        cnew =findViewById(R.id.editNewCpwd);
+        username.setText("User");
+        cpassword = findViewById(R.id.ubtnCapassword);
+        old = findViewById(R.id.ueditOldpwd);
+        newp = findViewById(R.id.ueditNewpwd);
+        cnew =findViewById(R.id.ueditNewCpwd);
         toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.Open,R.string.Close);
         drawerLayout.addDrawerListener(toggle);
         toggle.setDrawerIndicatorEnabled(true);
         toggle.syncState();
+    }
+
+    private void logOut() {
+        fAuth.signOut();
+        startActivity(new Intent(User_Cpassword.this,MainActivity.class));
+        finish();
     }
 
     private boolean isValid(EditText old, EditText newp, EditText cnew) {
@@ -164,13 +167,13 @@ public class Admin_cpassword extends AppCompatActivity {
                         public void onComplete(@NonNull @NotNull Task<Void> task) {
                             if(task.isSuccessful())
                             {
-                                Toast.makeText(Admin_cpassword.this,"Successfully Changed Password,Please Login Again...",Toast.LENGTH_LONG).show();
-                                startActivity(new Intent(Admin_cpassword.this,login.class));
+                                Toast.makeText(User_Cpassword.this,"Successfully Changed Password,Please Login Again...",Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(User_Cpassword.this,login.class));
                                 finish();
 
                             }
                             else{
-                                Toast.makeText(Admin_cpassword.this,task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                                Toast.makeText(User_Cpassword.this,task.getException().getMessage(),Toast.LENGTH_LONG).show();
                             }
                         }
                     });
@@ -178,16 +181,10 @@ public class Admin_cpassword extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NotNull Exception e) {
-                    Toast.makeText(Admin_cpassword.this,e.getMessage(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(User_Cpassword.this,e.getMessage(),Toast.LENGTH_LONG).show();
                 }
             });
         }
-    }
-
-    private void logOut() {
-        fAuth.signOut();
-        startActivity(new Intent(Admin_cpassword.this,MainActivity.class));
-        finish();
     }
 
 

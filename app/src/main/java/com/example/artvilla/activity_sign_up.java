@@ -66,7 +66,6 @@ public class activity_sign_up extends AppCompatActivity {
                     String uPwd = pwd.getText().toString();
 
                     progressBar.setVisibility(View.VISIBLE);
-//                    Toast.makeText(activity_sign_up.this,"Created....",Toast.LENGTH_SHORT).show();
                     fAuth.createUserWithEmailAndPassword(uMail,uPwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {

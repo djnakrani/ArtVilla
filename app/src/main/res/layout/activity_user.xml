@@ -16,10 +16,10 @@
         />
 
     <RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="?attr/actionBarSize"
-    android:background="@drawable/white_bg">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:background="@drawable/white_bg">
         
     <ImageView
         android:id="@+id/ProfilePhoto"
@@ -29,54 +29,96 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"/>
 
-    <EditText
-        android:id="@+id/edituName"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/mainText"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:layout_marginTop="50dp"
-        android:layout_centerHorizontal="true"
-        android:hint="Full Name"
-        android:layout_below="@+id/ProfilePhoto"/>
-
-    <EditText
-        android:id="@+id/edituMono"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:layout_marginTop="10dp"
+        android:text="USER PROFILE"
+        android:layout_below="@id/ProfilePhoto"
         android:layout_centerHorizontal="true"
-        android:hint="Mobile Number"
-        android:layout_below="@+id/edituName"/>
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        />
 
-    <EditText
-        android:id="@+id/edituEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true"
-        android:hint="Email Id"
-        android:layout_below="@+id/edituMono"/>
+        <LinearLayout
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mainText"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            >
 
-    <Button
-        android:id="@+id/btnChangeDetails"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Change Profile"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:padding="10dp"
-        android:layout_below="@id/edituEmail"
-        android:textColor="@color/white"
-        android:background="@drawable/btn_bg"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="User Name:"
+                android:textSize="20dp"
+                android:fontFamily="sans-serif-black"
+                />
+            <TextView
+                android:id="@+id/userDisName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:text="MY NAME"
+                android:textSize="18dp"
+                />
+        </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            >
 
-</RelativeLayout>
-    <!--    </ScrollView>-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mobile:"
+                android:textSize="20dp"
+                android:fontFamily="sans-serif-black"
+                />
+            <TextView
+                android:id="@+id/userDisMobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:text="9067127486"
+                android:textSize="18dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/email"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email:"
+                android:textSize="20dp"
+                android:fontFamily="sans-serif-black"
+                />
+            <TextView
+                android:id="@+id/userDisEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:text="mail"
+                android:textSize="18dp"
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/user_nav"
         android:layout_marginTop="?attr/actionBarSize"

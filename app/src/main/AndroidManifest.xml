@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_logo_foreground"
         android:supportsRtl="true"
         android:theme="@style/theme.notitlebar">
-        <activity android:name=".forgotpassword"></activity>
+        <activity android:name=".User_favroite"></activity>
+        <activity android:name=".User_Cpassword" />
+        <activity android:name=".forgotpassword" />
         <activity android:name=".Admin_manageActivty" />
         <activity android:name=".Admin_additem" />
         <activity android:name=".Admin_cpassword" />

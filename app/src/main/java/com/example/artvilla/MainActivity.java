@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -50,9 +51,7 @@ public class MainActivity extends AppCompatActivity {
         searchView = findViewById(R.id.usearchView);
         showall();
         if(fAuth.getUid() != null){
-            loginbtn.setBackgroundResource(R.drawable.ic_baseline_person_24);
-            loginbtn.setWidth(20);
-            loginbtn.setHeight(20);
+            loginbtn.setBackgroundResource(R.drawable.ic_baseline_person_pin_);
             loginbtn.setText(" ");
         }
 
@@ -64,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
                     uData.child("User").child(fAuth.getUid()).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-//                            System.out.println(snapshot.child("userType"));
                             if (snapshot.child("userType").exists()) {
                                 if(snapshot.child("userType").getValue().equals("Admin")){
                                     startActivity(new Intent(MainActivity.this,Admin_Panel.class));
@@ -144,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<items> myitems=new ArrayList<>();
         for(items obj: list)
         {
-            if(obj.getItem_name().toLowerCase().contains(str.toLowerCase()))
+            if(obj.getArtist_name().toLowerCase().contains(str.toLowerCase()) | obj.getItem_name().toLowerCase().contains(str.toLowerCase()))
             {
                 myitems.add(obj);
             }

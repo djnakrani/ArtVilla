@@ -21,6 +21,7 @@
             android:id="@+id/ViewName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             >
             <TextView
                 android:layout_width="wrap_content"
@@ -35,11 +36,23 @@
                 android:id="@+id/Name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
                 android:textSize="18dp"
                 android:fontFamily="serif-monospace"
                 />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true">
+            
+            <ImageView
+                android:id="@+id/myFav"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_baseline_favorite_border_24"
+                />
         </LinearLayout>
         <ImageView
             android:id="@+id/ItemImage"
