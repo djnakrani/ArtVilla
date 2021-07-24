@@ -23,7 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class login extends AppCompatActivity {
-    TextView signup;
+    TextView signup,reset;
     EditText uname,upwd;
     Button login;
     ProgressBar loginprogBar;
@@ -39,6 +39,7 @@ public class login extends AppCompatActivity {
         uname = findViewById(R.id.signinemail);
         upwd = findViewById(R.id.signinpassword);
         login = findViewById(R.id.loginbtn);
+        reset = findViewById(R.id.forgotPassword);
         loginprogBar = findViewById(R.id.loginprogress);
 //        logindb = FirebaseDatabase.getInstance().getReference().child("User");
         uData = FirebaseDatabase.getInstance().getReference();
@@ -92,6 +93,13 @@ public class login extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(login.this, activity_sign_up.class));
                 finish();
+            }
+        });
+
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(login.this, forgotpassword.class));
             }
         });
     }

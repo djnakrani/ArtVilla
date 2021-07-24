@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -69,6 +70,12 @@ public class Admin_additem extends AppCompatActivity {
         nav_user = findViewById(R.id.user_nav);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        String curr_usermail = fAuth.getCurrentUser().getEmail();
+        System.out.println(curr_usermail);
+        View nav = nav_user.getHeaderView(0);
+        TextView useremail = nav.findViewById(R.id.user_email);
+        useremail.setText(curr_usermail);
 
         toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.Open,R.string.Close);
         drawerLayout.addDrawerListener(toggle);

@@ -14,6 +14,8 @@ import android.view.MenuItem;
 import androidx.appcompat.widget.SearchView;
 
 import android.view.MotionEvent;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -48,6 +50,11 @@ public class Admin_manageActivty extends AppCompatActivity {
         nav_user = findViewById(R.id.user_nav);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        String curr_usermail = fAuth.getCurrentUser().getEmail();
+        System.out.println(curr_usermail);
+        View nav = nav_user.getHeaderView(0);
+        TextView useremail = nav.findViewById(R.id.user_email);
+        useremail.setText(curr_usermail);
         listitems = findViewById(R.id.Aitem_lists);
         searchView = findViewById(R.id.searchView);
 
