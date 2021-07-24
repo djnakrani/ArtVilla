@@ -8,7 +8,6 @@ public class User {
     private String Name;
     private String Mobile;
     private String Mail;
-    private String ImageURL;
     private String UserType;
 
     User()
@@ -20,7 +19,6 @@ public class User {
         Name = name;
         Mobile = mobile;
         Mail = mail;
-        ImageURL = imageURL;
         UserType = userType;
     }
 
@@ -54,14 +52,6 @@ public class User {
 
     public void setMail(String mail) {
         Mail = mail;
-    }
-
-    public String getImageURL() {
-        return ImageURL;
-    }
-
-    public void setImageURL(String imageURL) {
-        ImageURL = imageURL;
     }
 
     public String getUserType() {

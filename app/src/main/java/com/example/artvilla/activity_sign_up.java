@@ -75,13 +75,11 @@ public class activity_sign_up extends AppCompatActivity {
                                 FirebaseUser user = fAuth.getCurrentUser();
                                 String uId = user.getUid();
                                 uData =FirebaseDatabase.getInstance().getReference("User").child(uId);
-//                                HashMap<String,String> data=new HashMap<>();
                                 User u1 = new User();
                                 u1.setName(uName);
                                 u1.setMail(uMail);
                                 u1.setMobile(uMono);
                                 u1.setUserType("User");
-                                u1.setImageURL("Default");
                                 uData.setValue(u1).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                                     @Override

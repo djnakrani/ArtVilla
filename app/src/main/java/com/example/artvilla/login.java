@@ -49,42 +49,46 @@ public class login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loginprogBar.setVisibility(View.VISIBLE);
-                String uName=uname.getText().toString();
-                String uPwd = upwd.getText().toString();
+                if(isvalid(uname,upwd))
+                {
+                    String uName=uname.getText().toString();
+                    String uPwd = upwd.getText().toString();
 
-                fAuth.signInWithEmailAndPassword(uName,uPwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful())
-                        {
-                            String uId=fAuth.getCurrentUser().getUid();
-                            uData.child("User").child(uId).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                    if(task.isSuccessful()){
-                                        if(task.getResult().child("userType").exists())
-                                        {
-                                            User obj = task.getResult().getValue(User.class);
-                                            if((obj.getUserType()).equals("Admin")){
-                                                startActivity(new Intent(login.this, Admin_Panel.class));
-                                                finish();
-                                            }
-                                            else {
-                                                startActivity(new Intent(login.this, MainActivity.class));
-                                                finish();
-                                            }
+                    fAuth.signInWithEmailAndPassword(uName,uPwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful())
+                            {
+                                String uId=fAuth.getCurrentUser().getUid();
+                                uData.child("User").child(uId).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                        if(task.isSuccessful()){
+                                            if(task.getResult().child("userType").exists())
+                                            {
+                                                User obj = task.getResult().getValue(User.class);
+                                                if((obj.getUserType()).equals("Admin")){
+                                                    startActivity(new Intent(login.this, Admin_Panel.class));
+                                                    finish();
+                                                }
+                                                else {
+                                                    startActivity(new Intent(login.this, MainActivity.class));
+                                                    finish();
+                                                }
 
+                                            }
+                                        }else {
+                                            Toast.makeText(login.this,task.getException().getMessage(),Toast.LENGTH_LONG).show();
                                         }
-                                    }else {
-                                        Toast.makeText(login.this,task.getException().getMessage(),Toast.LENGTH_LONG).show();
                                     }
-                                }
-                            });
-                        }else {
-                            Toast.makeText(login.this,task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                                });
+                            }else {
+                                Toast.makeText(login.this,task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                            }
                         }
-                    }
-                });
+                    });
+                }
+
             }
         });
 
@@ -102,5 +106,29 @@ public class login extends AppCompatActivity {
                 startActivity(new Intent(login.this, forgotpassword.class));
             }
         });
+    }
+
+    private boolean isvalid(EditText uname, EditText upwd) {
+        boolean isuname,ispwd;
+        if(uname.getText().toString().isEmpty())
+        {
+            uname.setError("Email Not Blank Consider..");
+            isuname = false;
+        }
+        else
+            isuname = true;
+
+        if(upwd.getText().toString().isEmpty())
+        {
+            upwd.setError("Email Not Blank Consider..");
+            ispwd = false;
+        }
+        else
+            ispwd = true;
+
+        if(isuname & ispwd)
+            return true;
+        else
+            return false;
     }
 }
