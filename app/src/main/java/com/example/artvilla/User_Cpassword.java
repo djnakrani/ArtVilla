@@ -50,6 +50,10 @@ public class User_Cpassword extends AppCompatActivity {
                 int id = item.getItemId();
                 switch(id)
                 {
+                    case R.id.Main:
+                        startActivity(new Intent(User_Cpassword.this, MainActivity.class));
+                        finish();
+                        break;
                     case R.id.uProfile:
                         startActivity(new Intent(User_Cpassword.this, User_Activity.class));
                         finish();

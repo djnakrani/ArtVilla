@@ -53,6 +53,10 @@ public class Admin_Panel extends AppCompatActivity {
                 int id = item.getItemId();
                 switch(id)
                 {
+                    case R.id.aMain:
+                        startActivity(new Intent(Admin_Panel.this, MainActivity.class));
+                        finish();
+                        break;
                     case R.id.aHome:
                         Toast.makeText(Admin_Panel.this, "You Are Already In Home Page...",Toast.LENGTH_SHORT).show();
                         break;

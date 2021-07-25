@@ -71,6 +71,10 @@ public class Admin_manageActivty extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
                 int id = item.getItemId();
                 switch (id) {
+                    case R.id.aMain:
+                        startActivity(new Intent(Admin_manageActivty.this, MainActivity.class));
+                        finish();
+                        break;
                     case R.id.aHome:
                         startActivity(new Intent(Admin_manageActivty.this, Admin_Panel.class));
                         finish();

@@ -24,6 +24,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
@@ -39,7 +40,8 @@ public class User_favroite extends AppCompatActivity {
     FirebaseUser fUser;
     RecyclerView listitems;
     SearchView searchView;
-    DatabaseReference iData,fData;
+    DatabaseReference iData;
+    Query fData;
     ArrayList<items> list;
     user_itemadapter user_itemadapter;
     @Override
@@ -58,6 +60,11 @@ public class User_favroite extends AppCompatActivity {
                 int id = item.getItemId();
                 switch(id)
                 {
+                    case R.id.Main:
+                        startActivity(new Intent(User_favroite.this, MainActivity.class));
+                        finish();
+                        break;
+
                     case R.id.uProfile:
                         startActivity(new Intent(User_favroite.this, User_Activity.class));
                         finish();
@@ -109,7 +116,7 @@ public class User_favroite extends AppCompatActivity {
 
     private void showall() {
         iData= FirebaseDatabase.getInstance().getReference("Items");
-        fData = FirebaseDatabase.getInstance().getReference("Favroite");
+        fData = FirebaseDatabase.getInstance().getReference().child("Favroite");
         listitems.setLayoutManager(new LinearLayoutManager(getBaseContext(),LinearLayoutManager.VERTICAL,false));
         listitems.setHasFixedSize(true);
         onStart();
@@ -123,54 +130,72 @@ public class User_favroite extends AppCompatActivity {
         {
             fData.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
-                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                public void onDataChange(@NotNull DataSnapshot snapshot) {
                     if(snapshot.exists())
                     {
-                        list = new ArrayList<>();
-                        for(DataSnapshot sp:snapshot.getChildren()){
+                        System.out.println(snapshot);
+                        System.out.println(list);
+//                        if(!list.contains(snapshot)) {
+                            list = new ArrayList<>();
+                            for (DataSnapshot sp : snapshot.getChildren()) {
                                 String Itemid = sp.child("ItemId").getValue().toString();
                                 System.out.println(iData.child(Itemid));
                                 iData.child(Itemid).addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
-                                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot2) {
-                                        if(snapshot2.exists())
-                                        {
+                                    public void onDataChange(@NotNull DataSnapshot snapshot2) {
+                                        if (snapshot2.exists()) {
                                             list.add(snapshot2.getValue(items.class));
                                         }
                                     }
 
                                     @Override
-                                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+                                    public void onCancelled(@NonNull DatabaseError error) {
 
                                     }
                                 });
-                            user_itemadapter = new user_itemadapter(list);
-                            listitems.setAdapter(user_itemadapter);
-
-                        }
+                                user_itemadapter = new user_itemadapter(list);
+                                listitems.setAdapter(user_itemadapter);
+                            }
+//                        }
                     }
                 }
 
                 @Override
-                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+                public void onCancelled(@NotNull DatabaseError error) {
 
                 }
             });
-        }
-        if(searchView!=null)
-        {
-            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String query) {
-                    return false;
-                }
+            if(searchView!=null)
+            {
+                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        return false;
+                    }
 
-                @Override
-                public boolean onQueryTextChange(String str) {
-                    searchdata(str);
-                    return false;
-                }
-            });
+                    @Override
+                    public boolean onQueryTextChange(String str) {
+                        searchdata(str);
+                        return false;
+                    }
+                });
+            }
+        } else {
+            if(searchView!=null)
+            {
+                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String str) {
+                        searchdata(str);
+                        return false;
+                    }
+                });
+            }
         }
     }
 

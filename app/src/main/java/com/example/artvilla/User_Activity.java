@@ -50,6 +50,10 @@ public class User_Activity extends AppCompatActivity {
                 int id = item.getItemId();
                 switch(id)
                 {
+                    case R.id.Main:
+                        startActivity(new Intent(User_Activity.this, MainActivity.class));
+                        finish();
+                        break;
                     case R.id.uProfile:
                         Toast.makeText(User_Activity.this, "You Are Already In This Page...",Toast.LENGTH_SHORT).show();
                         break;

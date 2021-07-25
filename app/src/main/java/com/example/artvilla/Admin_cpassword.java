@@ -50,6 +50,10 @@ public class Admin_cpassword extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
                 int id = item.getItemId();
                 switch (id) {
+                    case R.id.aMain:
+                        startActivity(new Intent(Admin_cpassword.this, MainActivity.class));
+                        finish();
+                        break;
                     case R.id.aHome:
                         startActivity(new Intent(Admin_cpassword.this, Admin_Panel.class));
                         finish();

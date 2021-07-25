@@ -1,6 +1,7 @@
 package com.example.artvilla;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -38,6 +41,7 @@ public class user_itemadapter extends RecyclerView.Adapter<user_itemadapter.MyVi
     String genId;
     FirebaseAuth fAuth = FirebaseAuth.getInstance();
     FirebaseUser fUser = fAuth.getCurrentUser();
+
     DatabaseReference df = FirebaseDatabase.getInstance().getReference("Favroite");
     public user_itemadapter(ArrayList<items> list) {
         this.list = list;
@@ -56,25 +60,26 @@ public class user_itemadapter extends RecyclerView.Adapter<user_itemadapter.MyVi
         holder.artistName.setText(list.get(pos).getArtist_name());
         holder.aMono.setText(list.get(pos).getartist_mono());
         Picasso.get().load(Uri.parse(list.get(pos).getPhotoPath())).into(holder.image);
-        genId = fUser.getUid()+holder.itemName.getText().toString();
-        df.child(genId).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                System.out.println(snapshot);
-                if(snapshot.exists())
-                {
-                    holder.fav.setImageResource(R.drawable.ic_baseline_favorite_24);
+        System.out.println(fUser);
+        if(fUser != null) {
+            genId = fUser.getUid() + holder.itemName.getText().toString();
+            df.child(genId).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    System.out.println(snapshot);
+                    if (snapshot.exists()) {
+                        holder.fav.setImageResource(R.drawable.ic_baseline_favorite_24);
+                    } else {
+                        holder.fav.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+                    }
                 }
-                else {
-                    holder.fav.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
                 }
-            }
-
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-            }
-        });
+            });
+        }
     }
 
     @Override
@@ -99,42 +104,45 @@ public class user_itemadapter extends RecyclerView.Adapter<user_itemadapter.MyVi
                 @Override
                 public void onClick(View v) {
 
-                    genId = fUser.getUid()+itemName.getText().toString();
-                    df.child(genId).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                            System.out.println(snapshot);
-                            if(snapshot.exists())
-                            {
-                                for (DataSnapshot ds : snapshot.getChildren()) {
-                                    ds.getRef().removeValue();
-                                }
-                                fav.setImageResource(R.drawable.ic_baseline_favorite_border_24);
-                            }
-                            else {
-                                HashMap<String,String> mv =new HashMap<>();
-                                mv.put("UserId",fAuth.getUid());
-                                mv.put("ItemId",itemName.getText().toString());
-                                df.child(genId).setValue(mv).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull @NotNull Task<Void> task) {
-                                        if(task.isSuccessful())
-                                        {
-                                            fav.setImageResource(R.drawable.ic_baseline_favorite_24);
-                                        }
-                                        else {
-                                            Toast.makeText(fav.getContext(),"Something Error...",Toast.LENGTH_LONG ).show();
-                                        }
+                    if(fUser != null) {
+                        genId = fUser.getUid() + itemName.getText().toString();
+                        df.child(genId).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                System.out.println(snapshot);
+                                if (snapshot.exists()) {
+                                    for (DataSnapshot ds : snapshot.getChildren()) {
+                                        ds.getRef().removeValue();
                                     }
-                                });
+                                    fav.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+                                } else {
+                                    HashMap<String, String> mv = new HashMap<>();
+                                    mv.put("UserId", fAuth.getUid());
+                                    mv.put("ItemId", itemName.getText().toString());
+                                    df.child(genId).setValue(mv).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                fav.setImageResource(R.drawable.ic_baseline_favorite_24);
+                                            } else {
+                                                Toast.makeText(fav.getContext(), "Something Error...", Toast.LENGTH_LONG).show();
+                                            }
+                                        }
+                                    });
+                                }
                             }
-                        }
 
-                        @Override
-                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
+                            @Override
+                            public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
-                        }
-                    });
+                            }
+                        });
+                    }
+                    else
+                    {
+                        Toast.makeText(fav.getContext(), "Please Login First.", Toast.LENGTH_LONG).show();
+                        fav.getContext().startActivity(new Intent(fav.getContext(),login.class));
+                    }
                 }
             });
 
