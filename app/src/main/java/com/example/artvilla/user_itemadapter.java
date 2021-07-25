@@ -1,6 +1,7 @@
 package com.example.artvilla;
 
 import android.app.AlertDialog;
+import android.app.SearchManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -90,7 +91,7 @@ public class user_itemadapter extends RecyclerView.Adapter<user_itemadapter.MyVi
     class MyViewHolder extends RecyclerView.ViewHolder{
 
         public TextView itemName,artistName,aMono;
-        ImageView image,fav;
+        ImageView image,fav,ws,call;
         public MyViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
 
@@ -99,7 +100,8 @@ public class user_itemadapter extends RecyclerView.Adapter<user_itemadapter.MyVi
             aMono = itemView.findViewById(R.id.Price);
             image = itemView.findViewById(R.id.ItemImage);
             fav = itemView.findViewById(R.id.myFav);
-
+            ws = itemView.findViewById(R.id.whatsappMe);
+            call = itemView.findViewById(R.id.callMe);
             fav.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -147,7 +149,32 @@ public class user_itemadapter extends RecyclerView.Adapter<user_itemadapter.MyVi
             });
 
 
+            ws.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    sendmessage(aMono,itemName);
+                }
+            });
+
+            call.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    callme(aMono);
+                }
+            });
         }
 
+    }
+
+    private void callme(TextView aMono) {
+        Intent call=new Intent(Intent.ACTION_DIAL,Uri.parse("tel:"+aMono.getText().toString()));
+        aMono.getContext().startActivity(call);
+    }
+
+    private void sendmessage(TextView aMono, TextView itemName) {
+
+        Intent webserach = new Intent(Intent.ACTION_WEB_SEARCH);
+        webserach.putExtra(SearchManager.QUERY,"https://wa.me/91"+aMono.getText().toString()+"?text=It Is Available ?,Item Code:"+itemName.getText().toString());
+        aMono.getContext().startActivity(webserach);
     }
 }
