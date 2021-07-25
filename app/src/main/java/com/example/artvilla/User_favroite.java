@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class User_favroite extends AppCompatActivity {
 
@@ -119,7 +121,7 @@ public class User_favroite extends AppCompatActivity {
         fData = FirebaseDatabase.getInstance().getReference().child("Favroite");
         listitems.setLayoutManager(new LinearLayoutManager(getBaseContext(),LinearLayoutManager.VERTICAL,false));
         listitems.setHasFixedSize(true);
-        onStart();
+//        onStart();
     }
 
     @Override
@@ -133,13 +135,10 @@ public class User_favroite extends AppCompatActivity {
                 public void onDataChange(@NotNull DataSnapshot snapshot) {
                     if(snapshot.exists())
                     {
-                        System.out.println(snapshot);
-                        System.out.println(list);
-//                        if(!list.contains(snapshot)) {
-                            list = new ArrayList<>();
+                        list = new ArrayList<>();
+                        if(list.size()<=snapshot.getChildrenCount()) {
                             for (DataSnapshot sp : snapshot.getChildren()) {
                                 String Itemid = sp.child("ItemId").getValue().toString();
-                                System.out.println(iData.child(Itemid));
                                 iData.child(Itemid).addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NotNull DataSnapshot snapshot2) {
@@ -156,7 +155,7 @@ public class User_favroite extends AppCompatActivity {
                                 user_itemadapter = new user_itemadapter(list);
                                 listitems.setAdapter(user_itemadapter);
                             }
-//                        }
+                        }
                     }
                 }
 
@@ -211,6 +210,5 @@ public class User_favroite extends AppCompatActivity {
             listitems.setAdapter(itemAdapter2);
         }
     }
-
 
 }
