@@ -138,20 +138,24 @@ public class User_favroite extends AppCompatActivity {
                         list = new ArrayList<>();
                         if(list.size()<=snapshot.getChildrenCount()) {
                             for (DataSnapshot sp : snapshot.getChildren()) {
-                                String Itemid = sp.child("ItemId").getValue().toString();
-                                iData.child(Itemid).addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NotNull DataSnapshot snapshot2) {
-                                        if (snapshot2.exists()) {
-                                            list.add(snapshot2.getValue(items.class));
+                                if(sp.child("UserId").getValue().toString().equals(fAuth.getUid()))
+                                {
+                                    System.out.println(sp.child("ItemId").getValue().toString());
+                                    String Itemid = sp.child("ItemId").getValue().toString();
+                                    iData.child(Itemid).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NotNull DataSnapshot snapshot2) {
+                                            if (snapshot2.exists()) {
+                                                list.add(snapshot2.getValue(items.class));
+                                            }
                                         }
-                                    }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
 
-                                    }
-                                });
+                                        }
+                                    });
+                                }
                                 user_itemadapter = new user_itemadapter(list);
                                 listitems.setAdapter(user_itemadapter);
                             }
