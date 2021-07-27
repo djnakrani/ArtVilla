@@ -59,10 +59,10 @@ public class user_itemadapter extends RecyclerView.Adapter<user_itemadapter.MyVi
     public void onBindViewHolder(@NonNull @NotNull MyViewHolder holder, int pos) {
         holder.itemName.setText(list.get(pos).getItem_name());
         holder.artistName.setText(list.get(pos).getArtist_name());
-        holder.aMono.setText(list.get(pos).getartist_mono());
         Picasso.get().load(Uri.parse(list.get(pos).getPhotoPath())).into(holder.image);
         System.out.println(fUser);
         if(fUser != null) {
+            holder.aMono.setText(list.get(pos).getartist_mono());
             genId = fUser.getUid() + holder.itemName.getText().toString();
             df.child(genId).addValueEventListener(new ValueEventListener() {
                 @Override
@@ -80,6 +80,10 @@ public class user_itemadapter extends RecyclerView.Adapter<user_itemadapter.MyVi
 
                 }
             });
+        }
+        else
+        {
+            holder.aMono.setText("Login To See");
         }
     }
 
@@ -152,14 +156,27 @@ public class user_itemadapter extends RecyclerView.Adapter<user_itemadapter.MyVi
             ws.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    sendmessage(aMono,itemName);
+                    if(fUser != null){
+                        sendmessage(aMono,itemName);
+                    }
+                    else{
+                        Toast.makeText(fav.getContext(), "Please Login First.", Toast.LENGTH_LONG).show();
+                        ws.getContext().startActivity(new Intent(fav.getContext(),login.class));
+                    }
                 }
             });
 
             call.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    callme(aMono);
+                    if(fUser != null){
+//                        sendmessage(aMono,itemName);
+                        callme(aMono);
+                    }
+                    else{
+                        Toast.makeText(fav.getContext(), "Please Login First.", Toast.LENGTH_LONG).show();
+                        call.getContext().startActivity(new Intent(fav.getContext(),login.class));
+                    }
                 }
             });
         }
